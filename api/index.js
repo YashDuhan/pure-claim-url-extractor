@@ -33,22 +33,50 @@ app.get("/extract", async (req, res) => {
 
     // Website-specific logic
     switch (website.toLowerCase()) {
+      // Swiggy Instamart case
+      case "swiggy-instamart":
+        // Title extraction
+        productTitle =
+          $("div[data-testid='item-display-name']").text().trim() ||
+          productTitle;
+
+        // Extract ingredients
+        ingredientsText = $("div.sc-aXZVg").text().trim() || ingredientsText;
+        break;
+
+      // Amazon case
       case "amazon":
         productTitle = $("#productTitle").text().trim() || productTitle;
         break;
 
+      // BigBasket case
       case "bigbasket":
         productTitle =
           $("h1.Description___StyledH-sc-82a36a-2.bofYPK").text().trim() ||
           productTitle;
         break;
 
+      // Flipkart case
       case "flipkart":
         productTitle = $("span.VU-ZEz").text().trim() || productTitle;
         break;
 
+      // Jiomart case
       case "jiomart":
         productTitle = $("#pdp_product_name").text().trim() || productTitle;
+        break;
+
+      // Blinkit case
+      case "blinkit":
+        productTitle =
+          $("h1[class^='ProductInfoCard__ProductName']").text().trim() ||
+          productTitle;
+        break;
+
+      // Zepto case
+      case "zepto":
+        productTitle =
+          $("h1[data-testid='pdp-product-name']").text().trim() || productTitle;
         break;
 
       default:
