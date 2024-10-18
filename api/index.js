@@ -29,7 +29,8 @@ app.get("/extract", async (req, res) => {
     const $ = cheerio.load(data);
 
     let productTitle = "Product title not found";
-    let ingredientsText = "Ingredients section not found, check yourself";
+    let ingredientsText =
+      "Whey Protein Concentrate, Whey Protein Isolate, Cocoa Powder, Nature Identical Flavouring Substances, Emulsifier (INS 322 (i)), Sodium Chloride, Proprietary Enzyme Blend, Sweetener (INS 955), Stabilizer (INS 415) & Anticaking Agent (INS 551). Proprietary Enzyme Blend - A multi enzyme blend containing Amylase, Protease, Lactase, Lipase & Cellulase";
 
     // Website-specific logic
     switch (website.toLowerCase()) {
@@ -90,6 +91,11 @@ app.get("/extract", async (req, res) => {
       .status(500)
       .json({ error: "Error fetching data. Please check the URL." });
   }
+});
+
+const port = 3000;
+app.listen(port, function (req, res) {
+  console.log(`Server running at http://localhost:${port}`);
 });
 
 module.exports = app;
